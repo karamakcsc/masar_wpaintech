@@ -125,7 +125,9 @@ app_license = "MIT"
 #		"on_trash": "method"
 #	}
 # }
-
+doctype_js = {
+    "Purchase Order" : "custom/purchase_order/purchase_order.js"
+}
 # Scheduled Tasks
 # ---------------
 
@@ -215,3 +217,13 @@ app_license = "MIT"
 # auth_hooks = [
 #	"masar_wpaintech.auth.validate"
 # ]
+fixtures = [
+    {"dt": "Custom Field", "filters": [
+        [
+            "name", "in", [
+                "Customer-custom_ref_no",
+                "Supplier-custom_ref_no"
+            ]
+        ]
+    ]}
+]
