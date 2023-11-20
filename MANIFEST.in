@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include masar_wpaintech *.css
+recursive-include masar_wpaintech *.csv
+recursive-include masar_wpaintech *.html
+recursive-include masar_wpaintech *.ico
+recursive-include masar_wpaintech *.js
+recursive-include masar_wpaintech *.json
+recursive-include masar_wpaintech *.md
+recursive-include masar_wpaintech *.png
+recursive-include masar_wpaintech *.py
+recursive-include masar_wpaintech *.svg
+recursive-include masar_wpaintech *.txt
+recursive-exclude masar_wpaintech *.pyc
