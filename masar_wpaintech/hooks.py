@@ -222,7 +222,8 @@ fixtures = [
         [
             "name", "in", [
                 "Customer-custom_ref_no",
-                "Supplier-custom_ref_no"
+                "Supplier-custom_ref_no",
+                "Purchase Order Item-custom_rate_per_unit"
             ]
         ]
     ]}

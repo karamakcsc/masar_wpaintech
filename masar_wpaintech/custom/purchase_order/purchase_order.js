@@ -1,16 +1,3 @@
-// frappe.ui.form.on("Purchase Order Item", "qty", function(frm, cdt, cdn) {
-//   var d = locals[cdt][cdn];
-//   if (d.item_code) {
-//     var uomNumericValue = parseFloat(d.uom.match(/\d+(\.\d+)?/)[0]);
-//     if (!isNaN(uomNumericValue)) {
-//       d.custom_rate_per_unit = flt(d.rate / uomNumericValue);
-//       cur_frm.refresh_field("custom_rate_per_unit");
-//     } else {
-//       frappe.msgprint(__("Invalid numeric value in UOM"));
-//     }
-//   }
-// });
-
 frappe.ui.form.on("Purchase Order Item", {
   qty: function(frm, cdt, cdn) {
     calculateCustomRatePerUnit(frm, cdt, cdn);
