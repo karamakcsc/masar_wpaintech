@@ -126,7 +126,8 @@ app_license = "MIT"
 #	}
 # }
 doctype_js = {
-    "Purchase Order" : "custom/purchase_order/purchase_order.js"
+    "Purchase Order" : "custom/purchase_order/purchase_order.js",
+    "Item" : "custom/item/item.js"
 }
 # Scheduled Tasks
 # ---------------
@@ -223,7 +224,10 @@ fixtures = [
             "name", "in", [
                 "Customer-custom_ref_no",
                 "Supplier-custom_ref_no",
-                "Purchase Order Item-custom_rate_per_unit"
+                "Purchase Order Item-custom_rate_per_unit",
+                "Item-custom_carton_capacity",
+                "Purchase Order Item-custom_no_cartron",
+                "Purchase Order Item-custom_carton_capacity"
             ]
         ]
     ]}
