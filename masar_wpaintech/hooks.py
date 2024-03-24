@@ -227,7 +227,12 @@ fixtures = [
                 "Purchase Order Item-custom_rate_per_unit",
                 "Item-custom_carton_capacity",
                 "Purchase Order Item-custom_no_cartron",
-                "Purchase Order Item-custom_carton_capacity"
+                "Purchase Order Item-custom_carton_capacity",
+                "Item Group-custom_group_code",
+                "Item-custom_group_code",
+                "Item-custom_manufacturing_code",
+                "Item-custom_description_ar",
+                "Item-custom_column_break_lb7yg"
             ]
         ]
     ]}
