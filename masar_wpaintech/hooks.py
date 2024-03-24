@@ -232,7 +232,8 @@ fixtures = [
                 "Item-custom_group_code",
                 "Item-custom_manufacturing_code",
                 "Item-custom_description_ar",
-                "Item-custom_column_break_lb7yg"
+                "Item-custom_column_break_lb7yg",
+                "Purchase Order-custom_ref_no"
             ]
         ]
     ]}
