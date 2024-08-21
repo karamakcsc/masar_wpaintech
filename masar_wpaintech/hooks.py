@@ -126,8 +126,8 @@ app_license = "MIT"
 #	}
 # }
 doctype_js = {
-    "Purchase Order" : "custom/purchase_order/purchase_order.js",
-    "Item" : "custom/item/item.js"
+    "Purchase Order" : "custom/purchase_order/purchase_order.js"
+    # "Item" : "custom/item/item.js"
 }
 # Scheduled Tasks
 # ---------------
