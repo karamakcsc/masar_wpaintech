@@ -81,3 +81,43 @@ function fetch_carton_capacity(frm, doc) {
 }
 
 /////////////Fetching Data/////////////////End Code
+
+////////////Filter Fields//////////////////Start Code
+
+frappe.ui.form.on('Purchase Order', {
+    onload: function(frm) {
+        freight_type_filter(frm);
+        shipping_terms_filter(frm);
+    },
+    refresh: function(frm) {
+        freight_type_filter(frm);
+        shipping_terms_filter(frm);
+    },
+    setup: function(frm) {
+        freight_type_filter(frm);
+        shipping_terms_filter(frm);
+    }
+});
+
+
+function freight_type_filter(frm) {
+    frm.fields_dict['custom_freight_type'].get_query = function() {
+        return {
+            filters: {
+                "disabled": 0
+            }
+        };
+    };
+}
+
+function shipping_terms_filter(frm) {
+    frm.fields_dict['custom_shipping_terms'].get_query = function() {
+        return {
+            filters: {
+                "disabled": 0
+            }
+        };
+    };
+}
+
+////////////Filter Fields//////////////////End Code
