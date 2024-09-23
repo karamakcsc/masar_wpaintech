@@ -130,7 +130,7 @@ doctype_js = {
     # "Item" : "custom/item/item.js"
 }
 # Scheduled Tasks
-# ---------------
+# ----------------
 
 # scheduler_events = {
 #	"all": [
