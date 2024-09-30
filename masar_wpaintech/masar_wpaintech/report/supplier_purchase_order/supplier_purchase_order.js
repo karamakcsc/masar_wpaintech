@@ -4,6 +4,22 @@
 frappe.query_reports["Supplier Purchase Order"] = {
 	"filters": [
 		{
+			fieldname: "name",
+			label: __("Purchase Order"),
+			fieldtype: "Link",
+			options: "Purchase Order"
+		},
+		{
+			fieldname: "from",
+			label: __("From Date"),
+			fieldtype: "Date",
+		},
+		{
+			fieldname: "to",
+			label: __("To Date"),
+			fieldtype: "Date",
+		},
+		{
 			fieldname: "item_code",
 			label: __("Item Code"),
 			fieldtype: "Link",
