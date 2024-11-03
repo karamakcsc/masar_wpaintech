@@ -95,7 +95,7 @@ function fetch_carton_capacity(frm, doc) {
     }
 }
 
-//////////// Filter Fields //////////////////
+////////// Filter Fields //////////////////
 
 frappe.ui.form.on('Purchase Order', {
     onload: function(frm) {
