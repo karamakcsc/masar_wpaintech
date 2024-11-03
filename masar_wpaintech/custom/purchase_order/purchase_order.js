@@ -30,7 +30,8 @@ function calc_rate_per_unit(frm, cdt, cdn) {
             d.custom_rate_per_unit = flt(d.rate / uomNumericValue);
             frm.refresh_field("items");
         } else {
-            frappe.msgprint(__("The UOM is not numerical"));
+            d.custom_rate_per_unit = flt(d.rate);
+            frm.refresh_field("items");
         }
     }
 }
@@ -43,7 +44,7 @@ function calc_carton_capacity(frm, cdt, cdn) {
     }
 }
 
-///////////// Fetching Data /////////////////
+/////////// Fetching Data /////////////////
 
 frappe.ui.form.on('Purchase Order', {
     refresh: function(frm) {
