@@ -1,4 +1,4 @@
-///////////// Calculation Fields /////////////////
+///////// Calculation Fields /////////////////
 
 frappe.ui.form.on("Purchase Order Item", {
     qty: function(frm, cdt, cdn) {
