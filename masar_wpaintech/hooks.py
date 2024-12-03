@@ -126,7 +126,8 @@ app_license = "MIT"
 #	}
 # }
 doctype_js = {
-    "Purchase Order" : "custom/purchase_order/purchase_order.js"
+    "Purchase Order" : "custom/purchase_order/purchase_order.js",
+    "Purchase Receipt" : "custom/purchase_receipt/purchase_receipt.js"
     # "Item" : "custom/item/item.js"
 }
 # Scheduled Tasks
@@ -236,7 +237,13 @@ fixtures = [
                 "Purchase Order-custom_shipping_terms",
                 "Purchase Order-custom_freight_type",
                 "Purchase Order-custom_ref_number",
-                "Purchase Order Item-custom_manufacturing_code"
+                "Purchase Order Item-custom_manufacturing_code",
+                "Purchase Receipt-custom_ref_number",
+                "Purchase Receipt Item-custom_manufacturing_code",
+                "Purchase Receipt Item-custom_rate_per_unit",
+                "Purchase Receipt Item-custom_carton_capacity",
+                "Purchase Receipt Item-custom_no_carton",
+                "Purchase Receipt-custom_total_landed_cost_amount"
             ]
         ]
     ]}
