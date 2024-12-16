@@ -18,6 +18,11 @@ frappe.ui.form.on("Purchase Receipt Item", {
 frappe.ui.form.on("Purchase Receipt", {
     onload: function(frm) {
         calculate_all_items(frm);
+        calc_total_landed_cost(frm);
+    },
+    refresh: function(frm) {
+        calculate_all_items(frm);
+        calc_total_landed_cost(frm);
     },
     before_save: function(frm) {
         calculate_all_items(frm);
@@ -26,22 +31,12 @@ frappe.ui.form.on("Purchase Receipt", {
 
 function calculate_all_items(frm) {
     frm.doc.items.forEach(row => {
-        // Trigger calculations for each row
         fetch_carton_capacity(frm, row);
         calc_rate_per_unit(frm, row.doctype, row.name);
         calc_carton_capacity(frm, row.doctype, row.name);
     });
     frm.refresh_field("items");
 }
-
-frappe.ui.form.on('Purchase Receipt', {
-    refresh: function(frm) {
-        calc_total_landed_cost(frm);
-    },
-    onload: function(frm) {
-        calc_total_landed_cost(frm);
-    }
-});
 
 function calc_rate_per_unit(frm, cdt, cdn) {
     var d = locals[cdt][cdn];
@@ -74,19 +69,29 @@ function calc_carton_capacity(frm, cdt, cdn) {
 }
 
 function calc_total_landed_cost(frm) {
-    frappe.call({
-        method: "masar_wpaintech.custom.purchase_receipt.purchase_receipt.calc_landed_cost",
-        args: {
-            name: frm.doc.name,
+    let total_landed_cost = 0;
 
-        },
-        callback: function(r) {
-            if (r.message) {
-                console.log(r.message);
-                frm.refresh_field("custom_total_landed_cost_amount");
-            }
+    frm.doc.items.forEach(row => {
+        if (row.landed_cost_voucher_amount) {
+            total_landed_cost += flt(row.landed_cost_voucher_amount);
         }
-    })
+    });
+
+    if (total_landed_cost > 0) {
+        frappe.call({
+            method: "masar_wpaintech.custom.purchase_receipt.purchase_receipt.calc_landed_cost",
+            args: {
+                name: frm.doc.name,
+
+            },
+            callback: function(r) {
+                if (r.message) {
+                    console.log(r.message);
+                    frm.refresh_field("custom_total_landed_cost_amount");
+                }
+            }
+        })
+    }
 }
 
 /////////// Fetching Data /////////////////
