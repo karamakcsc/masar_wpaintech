@@ -20,10 +20,6 @@ frappe.ui.form.on("Purchase Receipt", {
         calculate_all_items(frm);
         calc_total_landed_cost(frm);
     },
-    refresh: function(frm) {
-        calculate_all_items(frm);
-        calc_total_landed_cost(frm);
-    },
     before_save: function(frm) {
         calculate_all_items(frm);
     },
@@ -31,7 +27,6 @@ frappe.ui.form.on("Purchase Receipt", {
 
 function calculate_all_items(frm) {
     frm.doc.items.forEach(row => {
-        fetch_carton_capacity(frm, row);
         calc_rate_per_unit(frm, row.doctype, row.name);
         calc_carton_capacity(frm, row.doctype, row.name);
     });
@@ -51,10 +46,8 @@ function calc_rate_per_unit(frm, cdt, cdn) {
 
         if (!isNaN(uomNumericValue)) {
             d.custom_rate_per_unit = flt(d.rate / uomNumericValue);
-            frm.refresh_field("items");
         } else {
             d.custom_rate_per_unit = flt(d.rate);
-            frm.refresh_field("items");
         }
     }
 }
@@ -86,7 +79,6 @@ function calc_total_landed_cost(frm) {
             },
             callback: function(r) {
                 if (r.message) {
-                    console.log(r.message);
                     frm.refresh_field("custom_total_landed_cost_amount");
                 }
             }
