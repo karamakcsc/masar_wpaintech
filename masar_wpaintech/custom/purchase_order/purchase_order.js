@@ -44,57 +44,6 @@ function calc_carton_capacity(frm, cdt, cdn) {
     }
 }
 
-/////////// Fetching Data /////////////////
-
-frappe.ui.form.on('Purchase Order', {
-    refresh: function(frm) {
-        frm.fields_dict['items'].grid.wrapper.on('grid-row-render', function(e, grid_row) {
-            var doc = grid_row.doc;
-            fetch_carton_capacity(frm, doc);
-        });
-    },
-
-    // supplier: function(frm) {
-    //     if (frm.doc.supplier) {
-    //         frm.fields_dict.items.grid.get_field('item_code').get_query = function(doc, cdt, cdn) {
-    //             return {
-    //                 filters: {
-    //                     'supplier': frm.doc.supplier
-    //                 }
-    //             };
-    //         };
-    //     }
-    // }
-});
-
-
-
-frappe.ui.form.on('Purchase Order Item', {
-    item_code: function(frm, cdt, cdn) {
-        var doc = locals[cdt][cdn];
-        fetch_carton_capacity(frm, doc);
-    }
-});
-
-function fetch_carton_capacity(frm, doc) {
-    if (doc.item_code) {
-        frappe.call({
-            method: 'frappe.client.get_value',
-            args: {
-                doctype: 'Item',
-                filters: { 'item_code': doc.item_code },
-                fieldname: 'custom_carton_capacity'
-            },
-            callback: function(r) {
-                if (r.message && r.message.custom_carton_capacity) {
-                    frappe.model.set_value(doc.doctype, doc.name, 'custom_carton_capacity', r.message.custom_carton_capacity);
-                    calc_carton_capacity(frm, doc.doctype, doc.name);
-                }
-            }
-        });
-    }
-}
-
 ////////// Filter Fields //////////////////
 
 frappe.ui.form.on('Purchase Order', {

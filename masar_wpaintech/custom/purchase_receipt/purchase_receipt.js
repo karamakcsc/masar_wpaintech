@@ -1,28 +1,13 @@
 ///////// Calculation Fields /////////////////
 
-frappe.ui.form.on("Purchase Receipt Item", {
-    qty: function(frm, cdt, cdn) {
-        calc_carton_capacity(frm, cdt, cdn);
-        calc_rate_per_unit(frm, cdt, cdn);
-    },
-    rate: function(frm, cdt, cdn) {
-        calc_carton_capacity(frm, cdt, cdn);
-        calc_rate_per_unit(frm, cdt, cdn);
-    },
-    uom: function(frm, cdt, cdn) {
-        calc_carton_capacity(frm, cdt, cdn);
-        calc_rate_per_unit(frm, cdt, cdn);
-    }
-});
-
 frappe.ui.form.on("Purchase Receipt", {
     onload: function(frm) {
         calculate_all_items(frm);
         calc_total_landed_cost(frm);
-    },
-    before_save: function(frm) {
-        calculate_all_items(frm);
-    },
+    }
+    // before_save: function(frm) {
+    //     calculate_all_items(frm);
+    // },
 });
 
 function calculate_all_items(frm) {
@@ -83,44 +68,5 @@ function calc_total_landed_cost(frm) {
                 }
             }
         })
-    }
-}
-
-/////////// Fetching Data /////////////////
-
-frappe.ui.form.on('Purchase Receipt', {
-    refresh: function(frm) {
-        frm.fields_dict['items'].grid.wrapper.on('grid-row-render', function(e, grid_row) {
-            var doc = grid_row.doc;
-            fetch_carton_capacity(frm, doc);
-        });
-    },
-});
-
-
-
-frappe.ui.form.on('Purchase Receipt Item', {
-    item_code: function(frm, cdt, cdn) {
-        var doc = locals[cdt][cdn];
-        fetch_carton_capacity(frm, doc);
-    }
-});
-
-function fetch_carton_capacity(frm, doc) {
-    if (doc.item_code) {
-        frappe.call({
-            method: 'frappe.client.get_value',
-            args: {
-                doctype: 'Item',
-                filters: { 'item_code': doc.item_code },
-                fieldname: 'custom_carton_capacity'
-            },
-            callback: function(r) {
-                if (r.message && r.message.custom_carton_capacity) {
-                    frappe.model.set_value(doc.doctype, doc.name, 'custom_carton_capacity', r.message.custom_carton_capacity);
-                    calc_carton_capacity(frm, doc.doctype, doc.name);
-                }
-            }
-        });
     }
 }
