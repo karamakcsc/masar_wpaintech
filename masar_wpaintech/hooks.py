@@ -118,16 +118,15 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-#	"*": {
-#		"on_update": "method",
-#		"on_cancel": "method",
-#		"on_trash": "method"
-#	}
-# }
+doc_events = {
+	"Landed Cost Voucher": {
+		"validate": "masar_wpaintech.custom.landed_cost_voucher.landed_cost_voucher.validate"
+	}
+}
 doctype_js = {
     "Purchase Order" : "custom/purchase_order/purchase_order.js",
     "Purchase Receipt" : "custom/purchase_receipt/purchase_receipt.js"
+    # "Landed Cost Voucher" : "custom/landed_cost_voucher/landed_cost_voucher.js"
     # "Item" : "custom/item/item.js"
 }
 # Scheduled Tasks
@@ -243,7 +242,10 @@ fixtures = [
                 "Purchase Receipt Item-custom_rate_per_unit",
                 "Purchase Receipt Item-custom_carton_capacity",
                 "Purchase Receipt Item-custom_no_carton",
-                "Purchase Receipt-custom_total_landed_cost_amount"
+                "Purchase Receipt-custom_total_landed_cost_amount",
+                "Landed Cost Voucher-custom_include_additional_charges",
+                "Landed Cost Item-custom_percentage",
+                "Landed Cost Voucher-custom_include_percentage"
             ]
         ]
     ]}
