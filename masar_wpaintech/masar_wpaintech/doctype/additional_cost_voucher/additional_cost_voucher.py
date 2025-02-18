@@ -10,8 +10,6 @@ class AdditionalCostVoucher(Document):
         self.create_lc()
 
     def validate(self):
-        # total_applicable_charges = sum(flt(d.applicable_charges) for d in self.get("items"))
-        # frappe.throw(str(total_applicable_charges))
         self.calc_cnf_customs()
 
     def calc_cnf_customs(self):
