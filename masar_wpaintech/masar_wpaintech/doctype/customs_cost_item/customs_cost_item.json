@@ -1,0 +1,108 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-02-10 16:00:45.506737",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "description",
+  "rate",
+  "qty",
+  "amount",
+  "column_break_rjju",
+  "cnf",
+  "customs_percentage",
+  "total_cost",
+  "total_amount",
+  "applicable_charges",
+  "purchase_receipt_item"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Description",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Rate",
+   "read_only": 1
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cnf",
+   "fieldtype": "Float",
+   "label": "CNF"
+  },
+  {
+   "fieldname": "customs_percentage",
+   "fieldtype": "Percent",
+   "label": "Tariff Rate"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Float",
+   "label": "Total Cost"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Float",
+   "label": "Total Amount"
+  },
+  {
+   "fieldname": "column_break_rjju",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "applicable_charges",
+   "fieldtype": "Float",
+   "label": "Applicable Charges"
+  },
+  {
+   "fieldname": "purchase_receipt_item",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Purchase Receipt Item",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-02-18 09:58:47.757155",
+ "modified_by": "Administrator",
+ "module": "Masar Wpaintech",
+ "name": "Customs Cost Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

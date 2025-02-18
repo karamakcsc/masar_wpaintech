@@ -1,0 +1,183 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:naming_series",
+ "creation": "2025-02-10 15:58:00.551012",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "purchase_receipt",
+  "purchase_receipt_total",
+  "get_items_from_purchase_receipt",
+  "column_break_rteo",
+  "shipping_terms",
+  "shipping_charges",
+  "supplier",
+  "reference_no",
+  "section_break_lpqd",
+  "items",
+  "applicable_charges_section",
+  "charges",
+  "total_charges",
+  "totals_section",
+  "total_cnf",
+  "column_break_gpdc",
+  "total_cost",
+  "section_break_bz7d",
+  "amended_from",
+  "naming_series"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_bz7d",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Additional Cost Voucher",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "shipping_charges",
+   "fieldtype": "Float",
+   "label": "Shipping Charges"
+  },
+  {
+   "fieldname": "purchase_receipt",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Purchase Receipt",
+   "link_filters": "[[\"Purchase Receipt\",\"docstatus\",\"=\",\"1\"]]",
+   "options": "Purchase Receipt"
+  },
+  {
+   "fieldname": "get_items_from_purchase_receipt",
+   "fieldtype": "Button",
+   "label": "Get Items From Purchase Receipt"
+  },
+  {
+   "fieldname": "column_break_rteo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_lpqd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Customs Cost Item"
+  },
+  {
+   "fetch_from": "purchase_receipt.base_total",
+   "fieldname": "purchase_receipt_total",
+   "fieldtype": "Currency",
+   "label": "Purchase Receipt Total",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "purchase_receipt.custom_shipping_terms",
+   "fieldname": "shipping_terms",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Shipping Terms",
+   "options": "Shipping Terms",
+   "read_only": 1
+  },
+  {
+   "fieldname": "applicable_charges_section",
+   "fieldtype": "Section Break",
+   "label": "Applicable Charges"
+  },
+  {
+   "fieldname": "charges",
+   "fieldtype": "Table",
+   "label": "charges",
+   "options": "Customs Cost Line"
+  },
+  {
+   "fieldname": "total_cnf",
+   "fieldtype": "Currency",
+   "label": "CNF Total"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "Total Cost"
+  },
+  {
+   "fieldname": "total_charges",
+   "fieldtype": "Currency",
+   "label": "Total Charges"
+  },
+  {
+   "fetch_from": "purchase_receipt.custom_ref_number",
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Reference No.",
+   "read_only": 1
+  },
+  {
+   "fieldname": "totals_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Totals"
+  },
+  {
+   "fieldname": "column_break_gpdc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "ACV-.YYYY.-"
+  },
+  {
+   "fetch_from": "purchase_receipt.supplier",
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-02-18 12:20:07.996622",
+ "modified_by": "Administrator",
+ "module": "Masar Wpaintech",
+ "name": "Additional Cost Voucher",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -118,11 +118,11 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-	"Landed Cost Voucher": {
-		"validate": "masar_wpaintech.custom.landed_cost_voucher.landed_cost_voucher.validate"
-	}
-}
+# doc_events = {
+# 	"Landed Cost Voucher": {
+# 		"validate": "masar_wpaintech.custom.landed_cost_voucher.landed_cost_voucher.validate"
+# 	}
+# }
 doctype_js = {
     "Purchase Order" : "custom/purchase_order/purchase_order.js",
     "Purchase Receipt" : "custom/purchase_receipt/purchase_receipt.js"
@@ -243,9 +243,13 @@ fixtures = [
                 "Purchase Receipt Item-custom_carton_capacity",
                 "Purchase Receipt Item-custom_no_carton",
                 "Purchase Receipt-custom_total_landed_cost_amount",
-                "Landed Cost Voucher-custom_include_additional_charges",
                 "Landed Cost Item-custom_percentage",
-                "Landed Cost Voucher-custom_include_percentage"
+                "Purchase Receipt-custom_shipping_terms",
+                "Landed Cost Item-custom_cnf",
+                "Landed Cost Item-custom_total_cost",
+                "Landed Cost Item-custom_total_amount",
+                "Purchase Invoice-custom_reference_number",
+                "Landed Cost Purchase Receipt-custom_reference_number"
             ]
         ]
     ]}
