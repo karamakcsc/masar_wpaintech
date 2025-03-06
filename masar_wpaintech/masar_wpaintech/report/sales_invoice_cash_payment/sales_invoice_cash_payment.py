@@ -18,7 +18,7 @@ def data(filters):
     if _from and to:
          conditions += f' AND posting_date BETWEEN "{_from}" AND "{to}"'
     sql = frappe.db.sql(f"""SELECT 
-                                name,customer, posting_date, grand_total, payment_type, status
+                                name, customer, posting_date, grand_total, custom_payment_type, status
                                 FROM `tabSales Invoice` 
                                 WHERE {conditions}  AND docstatus = 1;
 """)
