@@ -16,6 +16,7 @@ class AdditionalCostVoucher(Document):
         total_charges = 0
         total_cnf = 0
         total_cost = 0
+        total_amount = 0
         shipping_cost = self.shipping_charges if self.shipping_charges else None
 
         for char in self.charges:
@@ -43,10 +44,12 @@ class AdditionalCostVoucher(Document):
             item.total_amount = item.qty * item.total_cost
             total_cost += item.total_cost
             total_cnf += item.cnf
+            total_amount += item.total_amount
             item.applicable_charges = item.total_amount - item.amount
 
-        # self.total_cost = total_cost
-        # self.total_cnf = total_cnf
+        self.total_cost = total_cost
+        self.total_cnf = total_cnf
+        self.total_amount = total_amount
         
     def create_lc(self):
         new_lc = frappe.new_doc("Landed Cost Voucher")        
@@ -113,7 +116,10 @@ class AdditionalCostVoucher(Document):
             item.rate = d.base_rate
             item.amount = d.base_amount
             item.purchase_receipt_item = d.name
-
+            item.manufacturing_code = d.custom_manufacturing_code
+            item.uom = d.uom
+            
+ 
         return 1
 
 def get_pr_items(purchase_receipt):
@@ -130,6 +136,8 @@ def get_pr_items(purchase_receipt):
             pr_item.base_rate,
             pr_item.base_amount,
             pr_item.name,
+            pr_item.custom_manufacturing_code,
+            pr_item.uom,
         )
         .where(
             (pr_item.parent == purchase_receipt)

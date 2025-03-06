@@ -23,6 +23,8 @@
   "total_cnf",
   "column_break_gpdc",
   "total_cost",
+  "column_break_iqbd",
+  "total_amount",
   "section_break_bz7d",
   "amended_from",
   "naming_series"
@@ -102,7 +104,7 @@
   {
    "fieldname": "charges",
    "fieldtype": "Table",
-   "label": "charges",
+   "label": "Charges",
    "options": "Customs Cost Line"
   },
   {
@@ -132,7 +134,6 @@
   {
    "fieldname": "totals_section",
    "fieldtype": "Section Break",
-   "hidden": 1,
    "label": "Totals"
   },
   {
@@ -153,12 +154,21 @@
    "label": "Supplier",
    "options": "Supplier",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_iqbd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-02-18 13:16:43.230629",
+ "modified": "2025-02-23 11:47:23.301618",
  "modified_by": "Administrator",
  "module": "Masar Wpaintech",
  "name": "Additional Cost Voucher",

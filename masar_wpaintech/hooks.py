@@ -249,7 +249,11 @@ fixtures = [
                 "Landed Cost Item-custom_total_cost",
                 "Landed Cost Item-custom_total_amount",
                 "Purchase Invoice-custom_reference_number",
-                "Landed Cost Purchase Receipt-custom_reference_number"
+                "Landed Cost Purchase Receipt-custom_reference_number",
+                "Sales Invoice-custom_payment_type",
+                "Sales Invoice-custom_customer_name_en",
+                "Purchase Receipt-custom_invoice_no",
+                "Purchase Receipt-custom_invoice_date"
             ]
         ]
     ]}
