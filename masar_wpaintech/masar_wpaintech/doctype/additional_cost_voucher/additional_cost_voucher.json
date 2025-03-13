@@ -8,6 +8,7 @@
  "field_order": [
   "purchase_receipt",
   "purchase_receipt_total",
+  "exchange_rate",
   "get_items_from_purchase_receipt",
   "column_break_rteo",
   "shipping_terms",
@@ -163,12 +164,19 @@
    "fieldname": "total_amount",
    "fieldtype": "Currency",
    "label": "Total Amount"
+  },
+  {
+   "fetch_from": "purchase_receipt.conversion_rate",
+   "fieldname": "exchange_rate",
+   "fieldtype": "Float",
+   "label": "Exchange Rate",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-02-23 11:47:23.301618",
+ "modified": "2025-03-13 13:21:29.692283",
  "modified_by": "Administrator",
  "module": "Masar Wpaintech",
  "name": "Additional Cost Voucher",

@@ -125,7 +125,8 @@ app_license = "MIT"
 # }
 doctype_js = {
     "Purchase Order" : "custom/purchase_order/purchase_order.js",
-    "Purchase Receipt" : "custom/purchase_receipt/purchase_receipt.js"
+    "Purchase Receipt" : "custom/purchase_receipt/purchase_receipt.js",
+    "Journal Entry" : "custom/journal_entry/journal_entry.js"
     # "Landed Cost Voucher" : "custom/landed_cost_voucher/landed_cost_voucher.js"
     # "Item" : "custom/item/item.js"
 }
