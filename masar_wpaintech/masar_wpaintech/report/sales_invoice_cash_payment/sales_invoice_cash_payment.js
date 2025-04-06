@@ -6,7 +6,8 @@ frappe.query_reports["Sales Invoice Cash Payment"] = {
 		{
 			"fieldname":"name",
 			"label":"Sales Invoice",
-			"fieldtype":"Data"
+			"fieldtype":"Link",
+			"options": "Sales Invoice"
 		},
 		{
 			"fieldname":"customer",
@@ -29,6 +30,12 @@ frappe.query_reports["Sales Invoice Cash Payment"] = {
 			"fieldname":"to_date",
 			"label":"To Date",
 			"fieldtype":"Date"
+		},
+		{
+			"fieldname":"status",
+			"label":"Status",
+			"fieldtype":"Select",
+			"options": "\nPaid\nUnpaid\nPartialy Paid\nOverdue\nReturn"
 		},
 	]
 };

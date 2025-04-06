@@ -256,5 +256,17 @@ fixtures = [
                 "Purchase Receipt-custom_invoice_date"
             ]
         ]
-    ]}
+    ]},
+    {
+        "doctype": "Property Setter",
+        "filters": [
+            [
+                "name",
+                "in",
+                [
+                    "Sales Invoice-update_stock-default"
+                ]
+            ]
+        ]
+    }
 ]

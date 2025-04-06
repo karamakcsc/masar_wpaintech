@@ -9,11 +9,13 @@ def execute(filters=None):
 def data(filters):
     conditions=' 1=1 '
     if filters.get('customer'):
-        conditions += f' AND customer ="{filters.get("customer")}"'
+        conditions += f' AND tsi.customer ="{filters.get("customer")}"'
     if filters.get('payment_type'):
-        conditions += f' AND custom_payment_type ="{filters.get("payment_type")}"'
+        conditions += f' AND tsi.custom_payment_type ="{filters.get("payment_type")}"'
     if filters.get('name'):
-         conditions += f' AND name ="{filters.get("name")}"'    
+         conditions += f' AND tsi.name ="{filters.get("name")}"'    
+    if filters.get('status'):
+        conditions += f' AND tsi.status = "{filters.get("status")}"'
     _from, to = filters.get("from_date"), filters.get("to_date")
     if _from and to:
         conditions += f""" 
