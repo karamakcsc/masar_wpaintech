@@ -29,6 +29,7 @@ def data(filters):
     sql = frappe.db.sql(f"""SELECT 
                                 tsi.name,
                                 tsi.customer,
+                                COALESCE(NULLIF(tsi.custom_customer_name_en, ''), tsi.customer_name) AS `Customer Name`,
                                 tsi.posting_date,
                                 tsi.grand_total,
                                 tsi.custom_payment_type,
@@ -47,6 +48,7 @@ def columns():
     return[
          "Sales Invoice:Link/Sales Invoice:200",
          "Customer:Link/Customer:200",
+         "Customer Name: Data:200",
          "Posting Date:Date:200",
          "Grand Total:Currency:200",
          "Payment Type:Data:200",
