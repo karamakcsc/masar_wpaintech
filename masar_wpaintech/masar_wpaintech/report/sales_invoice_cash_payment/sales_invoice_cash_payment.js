@@ -37,5 +37,11 @@ frappe.query_reports["Sales Invoice Cash Payment"] = {
 			"fieldtype":"Select",
 			"options": "\nPaid\nUnpaid\nPartialy Paid\nOverdue\nReturn"
 		},
+		{
+			"fieldname":"mode_of_payment",
+			"label":"Mode of Payment",
+			"fieldtype":"Link",
+			"options": "Mode of Payment"
+		}
 	]
 };

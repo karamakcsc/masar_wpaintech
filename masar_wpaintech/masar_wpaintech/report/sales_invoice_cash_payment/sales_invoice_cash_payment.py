@@ -16,6 +16,8 @@ def data(filters):
          conditions += f' AND tsi.name ="{filters.get("name")}"'    
     if filters.get('status'):
         conditions += f' AND tsi.status = "{filters.get("status")}"'
+    if filters.get('mode_of_payment'):
+        conditions += f' AND tpe.mode_of_payment = "{filters.get("mode_of_payment")}"'
     _from, to = filters.get("from_date"), filters.get("to_date")
     if _from and to:
         conditions += f""" 
@@ -40,7 +42,7 @@ def data(filters):
                             LEFT JOIN `tabPayment Entry Reference` tper ON tper.reference_name = tsi.name AND tper.docstatus = 1
                             LEFT JOIN `tabPayment Entry` tpe ON tpe.name = tper.parent AND tpe.docstatus = 1
                             WHERE {conditions}  AND tsi.docstatus = 1;
-""")
+        """)
     return sql
 
 
