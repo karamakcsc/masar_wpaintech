@@ -33,7 +33,7 @@ def data(filters):
                                 tsi.customer,
                                 COALESCE(NULLIF(tsi.custom_customer_name_en, ''), tsi.customer_name) AS `Customer Name`,
                                 tsi.posting_date,
-                                tsi.grand_total,
+                                COALESCE(tpe.paid_amount,tsi.grand_total) AS `Grand Total`,
                                 tsi.custom_payment_type,
                                 tsi.status,
                                 tpe.posting_date,
