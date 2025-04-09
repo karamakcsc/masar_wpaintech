@@ -253,7 +253,8 @@ fixtures = [
                 "Sales Invoice-custom_payment_type",
                 "Sales Invoice-custom_customer_name_en",
                 "Purchase Receipt-custom_invoice_no",
-                "Purchase Receipt-custom_invoice_date"
+                "Purchase Receipt-custom_invoice_date",
+                "Journal Entry Account-custom_masar_ref_no"
             ]
         ]
     ]},
