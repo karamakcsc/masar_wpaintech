@@ -37,7 +37,7 @@ class AdditionalCostVoucher(Document):
             elif shipping_cost and not tariff_rate:
                 item.total_cost = (total_charges / (self.purchase_receipt_total + shipping_cost)) * item.cnf + item.cnf
             elif tariff_rate and not shipping_cost:
-                item.total_cost = (tariff_rate / 100) * item.cnf + item.cnf
+                item.total_cost = (total_charges / (self.purchase_receipt_total) + (tariff_rate / 100)) * item.cnf + item.cnf
             elif not shipping_cost and not tariff_rate:
                 item.total_cost = (total_charges / (self.purchase_receipt_total)) * item.cnf + item.cnf
 

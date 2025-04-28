@@ -1,6 +1,7 @@
-frappe.ui.form.on("Sales Invoice", {
-	validate: function(frm) {
+frappe.ui.form.on('Quotation', {
+	validate(frm) {
 		let tax_template = frm.doc.taxes_and_charges;
+		console.log(tax_template);
 
 		for (let i = 0; i < frm.doc.items.length; i++) {
 			let item = frm.doc.items[i];  
@@ -14,4 +15,4 @@ frappe.ui.form.on("Sales Invoice", {
 
 		frm.refresh_field("items");
 	},
-});
+})

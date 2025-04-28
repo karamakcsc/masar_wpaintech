@@ -234,7 +234,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Reports",
-   "link_count": 9,
+   "link_count": 10,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -328,9 +328,19 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "General Ledger - Waha",
+   "link_count": 0,
+   "link_to": "General Ledger - Waha",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-03-06 12:12:32.638269",
+ "modified": "2025-04-27 13:38:38.933349",
  "modified_by": "Administrator",
  "module": "Masar Wpaintech",
  "name": "Waha Paintech",
