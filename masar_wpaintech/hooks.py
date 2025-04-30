@@ -254,7 +254,7 @@ fixtures = [
                 "Sales Invoice-custom_payment_type",
                 "Sales Invoice-custom_customer_name_en",
                 "Journal Entry Account-custom_masar_ref_no",
-                "Purchase Invoice-custom_custom_ref_number",
+                "Purchase Invoice-custom_ref_number",
                 "Purchase Receipt-custom_bill_date",
                 "Purchase Receipt-custom_bill_no"
             ]
