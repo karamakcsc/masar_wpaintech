@@ -250,13 +250,13 @@ fixtures = [
                 "Landed Cost Item-custom_cnf",
                 "Landed Cost Item-custom_total_cost",
                 "Landed Cost Item-custom_total_amount",
-                "Purchase Invoice-custom_reference_number",
                 "Landed Cost Purchase Receipt-custom_reference_number",
                 "Sales Invoice-custom_payment_type",
                 "Sales Invoice-custom_customer_name_en",
-                "Purchase Receipt-custom_invoice_no",
-                "Purchase Receipt-custom_invoice_date",
-                "Journal Entry Account-custom_masar_ref_no"
+                "Journal Entry Account-custom_masar_ref_no",
+                "Purchase Invoice-custom_custom_ref_number",
+                "Purchase Receipt-custom_bill_date",
+                "Purchase Receipt-custom_bill_no"
             ]
         ]
     ]},
