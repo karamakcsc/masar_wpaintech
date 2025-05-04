@@ -14,8 +14,6 @@ class AdditionalCostVoucher(Document):
 
     def calc_cnf_customs(self):
         total_charges = 0
-        total_cnf = 0
-        total_cost = 0
         total_amount = 0
         shipping_cost = self.shipping_charges if self.shipping_charges else None
 
@@ -41,14 +39,12 @@ class AdditionalCostVoucher(Document):
             elif not shipping_cost and not tariff_rate:
                 item.total_cost = (total_charges / (self.purchase_receipt_total)) * item.cnf + item.cnf
 
-            item.total_amount = item.qty * item.total_cost
-            total_cost += item.total_cost
-            total_cnf += item.cnf
+            item.total_amount = item.qty * flt(item.total_cost, 2)
             total_amount += item.total_amount
             item.applicable_charges = item.total_amount - item.amount
 
-        self.total_cost = total_cost
-        self.total_cnf = total_cnf
+        self.total_cost = flt(total_amount - self.purchase_receipt_total, 2)
+        self.total_cnf = self.shipping_charges if self.shipping_charges else 0
         self.total_amount = total_amount
         
     def create_lc(self):
