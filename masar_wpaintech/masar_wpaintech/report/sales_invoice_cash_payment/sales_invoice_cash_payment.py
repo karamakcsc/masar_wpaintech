@@ -43,12 +43,12 @@ def data(filters):
                                 tsi.custom_payment_type,
                                 tsi.status,
                                 tpe.posting_date AS `Payment Date`,
-                                {query if filters.get("mode_of_payment") else ""}
+                                {query if filters.get("mode_of_payment") == "Cheque" else ""}
                                 tpe.mode_of_payment
                             FROM `tabSales Invoice` tsi
                             LEFT JOIN `tabPayment Entry Reference` tper ON tper.reference_name = tsi.name AND tper.docstatus = 1
                             LEFT JOIN `tabPayment Entry` tpe ON tpe.name = tper.parent AND tpe.docstatus = 1
-                            {join if filters.get("mode_of_payment") else ""}
+                            {join if filters.get("mode_of_payment") == "Cheque" else ""}
                             WHERE {conditions}  AND tsi.docstatus = 1;
         """)
     return sql
@@ -66,7 +66,7 @@ def columns(filters=None):
          "Payment Date: Date:200",
 	]
     
-    if filters.get("mode_of_payment"):
+    if filters.get("mode_of_payment") == "Cheque":
         columns += [
             "Cheque Value Date:Date:200",
         ]
