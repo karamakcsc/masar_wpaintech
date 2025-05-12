@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"ow4KJWC5GU\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Shortcuts</span>\",\"col\":12}},{\"id\":\"mEdNHK6LP0\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item\",\"col\":4}},{\"id\":\"dxUM4oQXAJ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":4}},{\"id\":\"KuA9Jo0goO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":4}},{\"id\":\"VJpOF581vA\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":4}},{\"id\":\"fSJKOKWUry\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Hpy8Wz00ra\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Reports &amp; Masters</span>\",\"col\":12}},{\"id\":\"0Kheikpa8X\",\"type\":\"card\",\"data\":{\"card_name\":\"Selling System\",\"col\":4}},{\"id\":\"XIfIo4_BSi\",\"type\":\"card\",\"data\":{\"card_name\":\"Buying System\",\"col\":4}},{\"id\":\"f74EzQ5BTU\",\"type\":\"card\",\"data\":{\"card_name\":\"Stock System\",\"col\":4}},{\"id\":\"rZYXBfOGr1\",\"type\":\"card\",\"data\":{\"card_name\":\"Accounting\",\"col\":4}},{\"id\":\"tRZ5kOiE0B\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"ow4KJWC5GU\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Shortcuts</span>\",\"col\":12}},{\"id\":\"mEdNHK6LP0\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item\",\"col\":4}},{\"id\":\"dxUM4oQXAJ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":4}},{\"id\":\"KuA9Jo0goO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":4}},{\"id\":\"VJpOF581vA\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":4}},{\"id\":\"fSJKOKWUry\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Hpy8Wz00ra\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Reports &amp; Masters</span>\",\"col\":12}},{\"id\":\"0Kheikpa8X\",\"type\":\"card\",\"data\":{\"card_name\":\"Selling System\",\"col\":4}},{\"id\":\"XIfIo4_BSi\",\"type\":\"card\",\"data\":{\"card_name\":\"Buying System\",\"col\":4}},{\"id\":\"f74EzQ5BTU\",\"type\":\"card\",\"data\":{\"card_name\":\"Stock System\",\"col\":4}},{\"id\":\"rZYXBfOGr1\",\"type\":\"card\",\"data\":{\"card_name\":\"Accounting\",\"col\":4}},{\"id\":\"tRZ5kOiE0B\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"Y1VVMehfZY\",\"type\":\"card\",\"data\":{\"card_name\":\"Other Reports\",\"col\":4}}]",
  "creation": "2023-06-18 16:25:19.945037",
  "custom_blocks": [],
  "docstatus": 0,
@@ -367,9 +367,48 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Other Reports",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Stock Analytics",
+   "link_count": 0,
+   "link_to": "Stock Analytics",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Itemwise Recommended Reorder Level",
+   "link_count": 0,
+   "link_to": "Itemwise Recommended Reorder Level",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Item Stock Balance",
+   "link_count": 0,
+   "link_to": "Item Stock Balance",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-04-29 13:22:06.659570",
+ "modified": "2025-05-12 14:12:09.065267",
  "modified_by": "Administrator",
  "module": "Masar Wpaintech",
  "name": "Waha Paintech",
