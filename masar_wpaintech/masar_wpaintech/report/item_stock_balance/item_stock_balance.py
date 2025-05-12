@@ -22,8 +22,7 @@ def data(filters):
     sql = frappe.db.sql(f"""
         SELECT
 			tb.item_code AS `Item Code`,
-			ti.item_name AS `Item Name`,
-			ti.item_group AS `Item Group`,
+			ti.custom_manufacturing_code AS `Manufacturing Code`,
 			ti.brand AS `Brand`,
 			tb.stock_uom AS `UOM`,
 			tb.warehouse AS `Warehouse`,
@@ -31,7 +30,7 @@ def data(filters):
 			tb.valuation_rate AS `Valuation Rate`
 		FROM `tabBin` tb
 		INNER JOIN `tabItem` ti ON ti.item_code = tb.item_code
-		WHERE {conditions}
+		WHERE {conditions} AND tb.warehouse NOT IN ('Stores - WP')
 	""")
     
     return sql
@@ -40,8 +39,7 @@ def data(filters):
 def columns(filters=None):
 	columns = [
 		"Item Code:Link/Item:200",
-		"Item Name::200",
-		"Item Group:Link/Item Group:200",
+		"Manufacturing Code::200",
 		"Brand:Link/Brand:200",
 		"Stock UOM::100",
 		"Warehouse:Link/Warehouse:200",
