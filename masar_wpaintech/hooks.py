@@ -256,7 +256,8 @@ fixtures = [
                 "Journal Entry Account-custom_masar_ref_no",
                 "Purchase Invoice-custom_ref_number",
                 "Purchase Receipt-custom_bill_date",
-                "Purchase Receipt-custom_bill_no"
+                "Purchase Receipt-custom_bill_no",
+                "Journal Entry-custom_reference_no"
             ]
         ]
     ]},

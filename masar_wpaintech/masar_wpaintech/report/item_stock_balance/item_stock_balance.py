@@ -16,33 +16,40 @@ def data(filters):
     if filters.get("brand"):
         conditions += f" AND ti.brand = '{filters.get('brand')}'"
         
-    group_by_field = filters.get("group_by") if filters.get("group_by") else "Warehouse"
-    if group_by_field == "Warehouse":
-        group_by = "tb.item_code, tb.warehouse"
-        select = "tb.actual_qty AS `Stock Balance`,"
-    elif group_by_field == "Item":
-        group_by = "tb.item_code"
-        select = "SUM(tb.actual_qty) AS `Stock Balance`,"
-    
+    if filters.get("group_by"):
+        group_by_fiter = filters.get("group_by")
+        if group_by_fiter == "Warehouse":
+            select = "tb.warehouse,"
+            group_by = "tb.item_code, tb.warehouse"
+        elif group_by_fiter == "Item":
+            select = "All Warehouses,"
+            group_by = "tb.item_code"
+            
     sql = frappe.db.sql(f"""
-        SELECT
+		WITH po AS(
+			SELECT 
+				tpo.name AS name,
+				tpoi.item_code,
+				tpoi.qty AS pending_order
+			FROM `tabPurchase Order` tpo 
+			INNER JOIN `tabPurchase Order Item` tpoi ON tpo.name = tpoi.parent
+			WHERE tpo.docstatus = 0
+		)
+		SELECT DISTINCT
 			tb.item_code AS `Item Code`,
 			ti.item_name AS `Item Name`,
 			ti.custom_manufacturing_code AS `Manufacturing Code`,
 			ti.brand AS `Brand`,
-			tb.stock_uom AS `UOM`,
-			ti.custom_carton_capacity AS `Qty Per Carton`,
-			tb.warehouse AS `Warehouse`,
+			tb.stock_uom AS `Stock UOM`,
 			{select}
-			tb.valuation_rate AS `Valuation Rate`,
-			SUM(IFNULL(tpoi.qty, 0)) AS `Pending Qty`
-		FROM `tabBin` tb
-		INNER JOIN `tabItem` ti ON ti.item_code = tb.item_code
-		LEFT JOIN `tabPurchase Order Item` tpoi ON tpoi.item_code = tb.item_code
-		LEFT JOIN `tabPurchase Order` tpo ON tpo.name = tpoi.parent AND tpo.docstatus = 0
+			SUM(tb.actual_qty) AS `Stock Balance`,
+			AVG(tb.valuation_rate) AS `Valuation Rate`,
+			SUM(IFNULL(po.pending_order, 0)) AS `Pending Qty`
+		FROM `tabBin` tb 
+		INNER JOIN `tabItem` ti ON tb.item_code = ti.name
+		LEFT JOIN po ON tb.item_code = po.item_code
 		WHERE {conditions} AND tb.warehouse NOT IN ('Stores - WP')
 		GROUP BY {group_by}
-		ORDER BY tb.item_code
 	""")
     
     return sql
