@@ -1,4 +1,4 @@
-// Copyright (c) 2025, KCSC and contributors
+// Copyright (c) 2025, KCSC and contributors //
 // For license information, please see license.txt
 
 frappe.query_reports["Item Stock Balance"] = {
@@ -22,7 +22,7 @@ frappe.query_reports["Item Stock Balance"] = {
 			"options": "Brand",
 		},
 		{
-			"filedname": "group_by",
+			"fieldname": "group_by",
 			"label": __("Group By"),
 			"fieldtype": "Select",
 			"options": "Warehouse\nItem",
