@@ -390,9 +390,9 @@
   {
    "hidden": 0,
    "is_query_report": 1,
-   "label": "Itemwise Recommended Reorder Level",
+   "label": "Item Stock Balance",
    "link_count": 0,
-   "link_to": "Itemwise Recommended Reorder Level",
+   "link_to": "Item Stock Balance",
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
@@ -400,15 +400,15 @@
   {
    "hidden": 0,
    "is_query_report": 1,
-   "label": "Item Stock Balance",
+   "label": "Itemwise Recommended Reorder Level - Waha",
    "link_count": 0,
-   "link_to": "Item Stock Balance",
+   "link_to": "Itemwise Recommended Reorder Level - Waha",
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
   }
  ],
- "modified": "2025-05-12 14:12:09.065267",
+ "modified": "2025-05-14 14:37:04.420499",
  "modified_by": "Administrator",
  "module": "Masar Wpaintech",
  "name": "Waha Paintech",
