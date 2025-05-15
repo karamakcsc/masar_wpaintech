@@ -27,13 +27,13 @@ def execute(filters=None):
 	for item in items:
 		total_outgoing = flt(consumed_item_map.get(item.name, 0)) + flt(delivered_item_map.get(item.name, 0))
 		avg_daily_outgoing = flt(total_outgoing / diff, float_precision)
+		avg_monthly_outgoing = flt(avg_daily_outgoing * 30, float_precision)
 		reorder_level = (avg_daily_outgoing * flt(item.lead_time_days)) + flt(item.safety_stock)
 
 		data.append(
 			[
 				item.name,
-				item.item_name,
-				item.item_group,
+				item.custom_manufacturing_code,
 				item.brand,
 				item.description,
 				item.safety_stock,
@@ -42,18 +42,21 @@ def execute(filters=None):
 				delivered_item_map.get(item.name, 0),
 				total_outgoing,
 				avg_daily_outgoing,
+				avg_monthly_outgoing,
 				reorder_level,
 			]
 		)
-
+	if filters.get("brand"):
+		columns = [col for col in columns if not col.startswith(_("Brand"))]
+		for row in data:
+			del row[2]
 	return columns, data
 
 
 def get_columns():
 	return [
 		_("Item") + ":Link/Item:120",
-		_("Item Name") + ":Data:120",
-		_("Item Group") + ":Link/Item Group:100",
+		_("Manufacturing Code") + ":Data:120",
 		_("Brand") + ":Link/Brand:100",
 		_("Description") + "::160",
 		_("Safety Stock") + ":Float:160",
@@ -62,6 +65,7 @@ def get_columns():
 		_("Delivered") + ":Float:120",
 		_("Total Outgoing") + ":Float:120",
 		_("Avg Daily Outgoing") + ":Float:160",
+		_("Avg Monthly Outgoing") + ":Float:160",
 		_("Reorder Level") + ":Float:120",
 	]
 
@@ -74,10 +78,10 @@ def get_item_info(filters):
 		frappe.qb.from_(item)
 		.select(
 			item.name,
-			item.item_name,
+			# item.item_name,
+			item.custom_manufacturing_code,
 			item.description,
 			item.brand,
-			item.item_group,
 			item.safety_stock,
 			item.lead_time_days,
 		)

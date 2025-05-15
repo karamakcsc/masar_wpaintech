@@ -372,7 +372,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Other Reports",
-   "link_count": 3,
+   "link_count": 4,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -406,9 +406,19 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Sales Invoice Trends - Waha",
+   "link_count": 0,
+   "link_to": "Sales Invoice Trends - Waha",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-05-14 14:37:04.420499",
+ "modified": "2025-05-15 16:53:54.422283",
  "modified_by": "Administrator",
  "module": "Masar Wpaintech",
  "name": "Waha Paintech",
