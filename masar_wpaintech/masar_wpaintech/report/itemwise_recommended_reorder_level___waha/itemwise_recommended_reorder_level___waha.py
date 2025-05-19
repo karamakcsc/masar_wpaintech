@@ -22,6 +22,7 @@ def execute(filters=None):
 	items = get_item_info(filters)
 	consumed_item_map = get_consumed_items(filters)
 	delivered_item_map = get_delivered_items(filters)
+	bin_item_map = get_stock_balance(filters)
 
 	data = []
 	for item in items:
@@ -38,6 +39,7 @@ def execute(filters=None):
 				item.description,
 				item.safety_stock,
 				item.lead_time_days,
+				bin_item_map.get(item.name, 0),
 				consumed_item_map.get(item.name, 0),
 				delivered_item_map.get(item.name, 0),
 				total_outgoing,
@@ -58,9 +60,10 @@ def get_columns():
 		_("Item") + ":Link/Item:120",
 		_("Manufacturing Code") + ":Data:120",
 		_("Brand") + ":Link/Brand:100",
-		_("Description") + "::160",
+		_("Description") + "::250",
 		_("Safety Stock") + ":Float:160",
 		_("Lead Time Days") + ":Float:120",
+		_("Stock Balance") + ":Float:120",
 		_("Consumed") + ":Float:120",
 		_("Delivered") + ":Float:120",
 		_("Total Outgoing") + ":Float:120",
@@ -71,8 +74,6 @@ def get_columns():
 
 
 def get_item_info(filters):
-	from erpnext.stock.report.stock_ledger.stock_ledger import get_item_group_condition
-
 	item = frappe.qb.DocType("Item")
 	query = (
 		frappe.qb.from_(item)
@@ -90,9 +91,6 @@ def get_item_info(filters):
 
 	if brand := filters.get("brand"):
 		query = query.where(item.brand == brand)
-
-	if conditions := get_item_group_condition(filters.get("item_group"), item):
-		query = query.where(conditions)
 
 	return query.run(as_dict=True)
 
@@ -162,6 +160,23 @@ def get_delivered_items(filters):
 		dn_item_map.setdefault(item.item_code, item.si_qty)
 
 	return dn_item_map
+
+def get_stock_balance(filters):
+    bin = frappe.qb.DocType("Bin")
+    query = (
+        frappe.qb.from_(bin)
+		.select(bin.item_code, Sum(bin.actual_qty).as_("stock_qty"))
+		.groupby(bin.item_code)
+	)
+    
+    bin_items = query.run(as_dict=True)
+    
+    bin_item_map = {}
+    for item in bin_items:
+        bin_item_map.setdefault(item.item_code, item.stock_qty)
+        
+    return bin_item_map
+    
 
 
 def get_filtered_query(filters, table, query):

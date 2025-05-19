@@ -16,12 +16,6 @@ frappe.query_reports["Itemwise Recommended Reorder Level - Waha"] = {
 			default: frappe.datetime.get_today(),
 		},
 		{
-			fieldname: "item_group",
-			label: __("Item Group"),
-			fieldtype: "Link",
-			options: "Item Group",
-		},
-		{
 			fieldname: "brand",
 			label: __("Brand"),
 			fieldtype: "Link",
