@@ -176,7 +176,6 @@ def get_data(filters, conditions):
 
 				for j in range(1, len(conditions["columns"]) - inc):
 					des[j + inc] = row1[0][j]
-				frappe.msgprint(str(des))
 				data.append(des)
 	else:
 		data = frappe.db.sql(
@@ -200,7 +199,6 @@ def get_data(filters, conditions):
 			(filters.get("company"), from_date, to_date),
 			as_list=1,
 		)
-	frappe.msgprint(str(data))
 	return data
 
 def period_wise_columns_query(filters, trans):
