@@ -26,6 +26,9 @@ def execute(filters=None):
 
 	data = []
 	for item in items:
+		stock_qty = flt(bin_item_map.get(item.name, 0))
+		if filters.get("has_stock") and stock_qty <= 0:
+			continue
 		total_outgoing = flt(consumed_item_map.get(item.name, 0)) + flt(delivered_item_map.get(item.name, 0))
 		avg_daily_outgoing = flt(total_outgoing / diff, float_precision)
 		avg_monthly_outgoing = flt(avg_daily_outgoing * 30, float_precision)
@@ -40,7 +43,7 @@ def execute(filters=None):
 				item.stock_uom,
 				item.safety_stock,
 				item.lead_time_days,
-				bin_item_map.get(item.name, 0),
+				stock_qty,
 				consumed_item_map.get(item.name, 0),
 				delivered_item_map.get(item.name, 0),
 				total_outgoing,
@@ -94,7 +97,7 @@ def get_item_info(filters):
 
 	if brand := filters.get("brand"):
 		query = query.where(item.brand == brand)
-
+  
 	return query.run(as_dict=True)
 
 
@@ -171,6 +174,9 @@ def get_stock_balance(filters):
 		.select(bin.item_code, Sum(bin.actual_qty).as_("stock_qty"))
 		.groupby(bin.item_code)
 	)
+    
+    if filters.get("has_stock"):
+        query = query.where(bin.actual_qty > 0)
     
     bin_items = query.run(as_dict=True)
     

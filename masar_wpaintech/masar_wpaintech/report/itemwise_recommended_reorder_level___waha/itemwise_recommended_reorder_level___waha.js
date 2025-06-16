@@ -21,6 +21,11 @@ frappe.query_reports["Itemwise Recommended Reorder Level - Waha"] = {
 			fieldtype: "Link",
 			options: "Brand",
 		},
-
+		{
+			fieldname: "has_stock",
+			label: __("Has Stock"),
+			fieldtype: "Check",
+			default: 1,
+		}
 	]
 };
