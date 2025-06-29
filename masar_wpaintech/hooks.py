@@ -268,7 +268,10 @@ fixtures = [
                 "name",
                 "in",
                 [
-                    "Sales Invoice-update_stock-default"
+                    "Sales Invoice-update_stock-default",
+                    "Purchase Order-main-search_fields",
+                    "Purchase Receipt-main-search_fields",
+                    "Purchase Invoice-main-search_fields"
                 ]
             ]
         ]
