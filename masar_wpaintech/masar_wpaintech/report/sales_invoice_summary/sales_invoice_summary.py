@@ -23,12 +23,13 @@ def data(filters):
 								tsi.customer AS Customer,
 								tsi.customer_name AS `Customer Name`,
 								tsi.posting_date AS `Invoice Date`,
-								tsi.total AS `Net Total`,
+								tsi.net_total AS `Net Total`,
+                                tsi.discount_amount AS `Discount Amount`,
 								tsi.total_taxes_and_charges AS `Total Taxes and Charges`,
 								tsi.grand_total AS `Grand Total`,
 								tsi.status AS Status
 							FROM `tabSales Invoice` tsi
-							WHERE {conditions} AND tsi.docstatus > 0
+							WHERE {conditions} AND tsi.docstatus = 1
                                 
         """)
     return sql
@@ -41,6 +42,7 @@ def columns(filters=None):
          "Customer Name: Data:200",
          "Invoice Date:Date:200",
          "Net Total:Currency:200",
+         "Discount Amount:Currency:200",
          "Total Taxes and Charges:Currency:200",
          "Grand Total:Currency:200",
          "Status:Data:200",
