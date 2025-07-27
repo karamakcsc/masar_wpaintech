@@ -1,7 +1,6 @@
 # Copyright (c) 2025, KCSC and contributors
 # For license information, please see license.txt
 
-
 import frappe
 from frappe import _
 from frappe.query_builder.functions import Abs, Sum
@@ -23,6 +22,7 @@ def execute(filters=None):
 	consumed_item_map = get_consumed_items(filters)
 	delivered_item_map = get_delivered_items(filters)
 	bin_item_map = get_stock_balance(filters)
+	po_pending_map = get_po_pending_qty(filters)
 
 	data = []
 	for item in items:
@@ -33,6 +33,7 @@ def execute(filters=None):
 		avg_daily_outgoing = flt(total_outgoing / diff, float_precision)
 		avg_monthly_outgoing = flt(avg_daily_outgoing * 30, float_precision)
 		reorder_level = (avg_daily_outgoing * flt(item.lead_time_days)) + flt(item.safety_stock)
+		po_pending_qty = flt(po_pending_map.get(item.name, 0))
 
 		data.append(
 			[
@@ -44,6 +45,7 @@ def execute(filters=None):
 				item.safety_stock,
 				item.lead_time_days,
 				stock_qty,
+				po_pending_qty,
 				consumed_item_map.get(item.name, 0),
 				delivered_item_map.get(item.name, 0),
 				total_outgoing,
@@ -52,10 +54,12 @@ def execute(filters=None):
 				reorder_level,
 			]
 		)
+
 	if filters.get("brand"):
 		columns = [col for col in columns if not col.startswith(_("Brand"))]
 		for row in data:
 			del row[2]
+
 	return columns, data
 
 
@@ -69,6 +73,7 @@ def get_columns():
 		_("Safety Stock") + ":Float:160",
 		_("Lead Time Days") + ":Float:120",
 		_("Stock Balance") + ":Float:120",
+		_("Pending Qty") + ":Float:120",
 		_("Consumed") + ":Float:120",
 		_("Delivered") + ":Float:120",
 		_("Total Outgoing") + ":Float:120",
@@ -84,7 +89,6 @@ def get_item_info(filters):
 		frappe.qb.from_(item)
 		.select(
 			item.name,
-			# item.item_name,
 			item.custom_manufacturing_code,
 			item.description,
 			item.stock_uom,
@@ -97,7 +101,7 @@ def get_item_info(filters):
 
 	if brand := filters.get("brand"):
 		query = query.where(item.brand == brand)
-  
+
 	return query.run(as_dict=True)
 
 
@@ -127,8 +131,7 @@ def get_consumed_items(filters):
 
 	consumed_items = query.run(as_dict=True)
 
-	consumed_items_map = {item.item_code: item.consumed_qty for item in consumed_items}
-	return consumed_items_map
+	return {item.item_code: item.consumed_qty for item in consumed_items}
 
 
 def get_delivered_items(filters):
@@ -160,32 +163,59 @@ def get_delivered_items(filters):
 
 	dn_item_map = {}
 	for item in dn_items:
-		dn_item_map.setdefault(item.item_code, item.dn_qty)
+		dn_item_map[item.item_code] = item.dn_qty
 
 	for item in si_items:
-		dn_item_map.setdefault(item.item_code, item.si_qty)
+		if item.item_code in dn_item_map:
+			dn_item_map[item.item_code] += item.si_qty
+		else:
+			dn_item_map[item.item_code] = item.si_qty
 
 	return dn_item_map
 
+
 def get_stock_balance(filters):
-    bin = frappe.qb.DocType("Bin")
-    query = (
-        frappe.qb.from_(bin)
+	bin = frappe.qb.DocType("Bin")
+	query = (
+		frappe.qb.from_(bin)
 		.select(bin.item_code, Sum(bin.actual_qty).as_("stock_qty"))
 		.groupby(bin.item_code)
 	)
-    
-    if filters.get("has_stock"):
-        query = query.where(bin.actual_qty > 0)
-    
-    bin_items = query.run(as_dict=True)
-    
-    bin_item_map = {}
-    for item in bin_items:
-        bin_item_map.setdefault(item.item_code, item.stock_qty)
-        
-    return bin_item_map
-    
+
+	if filters.get("has_stock"):
+		query = query.where(bin.actual_qty > 0)
+
+	bin_items = query.run(as_dict=True)
+
+	return {item.item_code: item.stock_qty for item in bin_items}
+
+
+def get_po_pending_qty(filters):
+	po = frappe.qb.DocType("Purchase Order")
+	poi = frappe.qb.DocType("Purchase Order Item")
+
+	query = (
+		frappe.qb.from_(po)
+		.from_(poi)
+		.select(
+			poi.item_code,
+			Sum(poi.qty - poi.received_qty).as_("pending_qty")
+		)
+		.where(
+			(po.name == poi.parent) &
+			(po.docstatus < 2) &
+			(po.status.notin(["Closed", "Completed", "Cancelled"])) &
+			(poi.received_qty < poi.qty)
+		)
+		.groupby(poi.item_code)
+	)
+
+	if filters.get("from_date") and filters.get("to_date"):
+		query = query.where(po.transaction_date.between(filters["from_date"], filters["to_date"]))
+
+	po_items = query.run(as_dict=True)
+
+	return {item.item_code: item.pending_qty for item in po_items}
 
 
 def get_filtered_query(filters, table, query):
