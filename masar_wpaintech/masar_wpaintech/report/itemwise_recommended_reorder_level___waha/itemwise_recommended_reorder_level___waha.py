@@ -32,7 +32,7 @@ def execute(filters=None):
 		total_outgoing = flt(consumed_item_map.get(item.name, 0)) + flt(delivered_item_map.get(item.name, 0))
 		avg_daily_outgoing = flt(total_outgoing / diff, float_precision)
 		avg_monthly_outgoing = flt(avg_daily_outgoing * 30, float_precision)
-		reorder_level = (avg_daily_outgoing * flt(item.lead_time_days)) + flt(item.safety_stock)
+		# reorder_level = (avg_daily_outgoing * flt(item.lead_time_days)) + flt(item.safety_stock)
 		po_pending_qty = flt(po_pending_map.get(item.name, 0))
 
 		data.append(
@@ -42,16 +42,17 @@ def execute(filters=None):
 				item.brand,
 				item.description,
 				item.stock_uom,
-				item.safety_stock,
-				item.lead_time_days,
+				# item.safety_stock,
+				# item.lead_time_days,
+				item.custom_carton_capacity,
 				stock_qty,
 				po_pending_qty,
 				consumed_item_map.get(item.name, 0),
 				delivered_item_map.get(item.name, 0),
 				total_outgoing,
-				avg_daily_outgoing,
+				# avg_daily_outgoing,
 				avg_monthly_outgoing,
-				reorder_level,
+				# reorder_level,
 			]
 		)
 
@@ -70,16 +71,17 @@ def get_columns():
 		_("Brand") + ":Link/Brand:100",
 		_("Description") + "::250",
 		_("Stock UOM") + ":Link/UOM:100",
-		_("Safety Stock") + ":Float:160",
-		_("Lead Time Days") + ":Float:120",
-		_("Stock Balance") + ":Float:120",
-		_("Pending Qty") + ":Float:120",
+		# _("Safety Stock") + ":Float:160",
+		# _("Lead Time Days") + ":Float:120",
+		_("Qty Per Carton") + ":Float:150",
+		_("Stock Balance") + ":Int:120",
+		_("Pending Qty") + ":Int:120",
 		_("Consumed") + ":Float:120",
 		_("Delivered") + ":Float:120",
 		_("Total Outgoing") + ":Float:120",
-		_("Avg Daily Outgoing") + ":Float:160",
+		# _("Avg Daily Outgoing") + ":Float:160",
 		_("Avg Monthly Outgoing") + ":Float:160",
-		_("Reorder Level") + ":Float:120",
+		# _("Reorder Level") + ":Float:120",
 	]
 
 
@@ -93,8 +95,9 @@ def get_item_info(filters):
 			item.description,
 			item.stock_uom,
 			item.brand,
-			item.safety_stock,
-			item.lead_time_days,
+			item.custom_carton_capacity,
+			# item.safety_stock,
+			# item.lead_time_days,
 		)
 		.where((item.is_stock_item == 1) & (item.disabled == 0))
 	)
