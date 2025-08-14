@@ -257,7 +257,8 @@ fixtures = [
                 "Purchase Invoice-custom_ref_number",
                 "Purchase Receipt-custom_bill_date",
                 "Purchase Receipt-custom_bill_no",
-                "Journal Entry-custom_reference_no"
+                "Journal Entry-custom_reference_no",
+                "Purchase Order-custom_order_ack_no"
             ]
         ]
     ]},
