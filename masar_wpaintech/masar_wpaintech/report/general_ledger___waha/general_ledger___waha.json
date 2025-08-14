@@ -9,7 +9,7 @@
  "idx": 9,
  "is_standard": "Yes",
  "letterhead": null,
- "modified": "2025-08-14 12:42:52.074181",
+ "modified": "2025-08-14 13:08:04.130839",
  "modified_by": "Administrator",
  "module": "Masar Wpaintech",
  "name": "General Ledger - Waha",
@@ -18,19 +18,6 @@
  "ref_doctype": "GL Entry",
  "report_name": "General Ledger - Waha",
  "report_type": "Script Report",
- "roles": [
-  {
-   "role": "Accounts Manager"
-  },
-  {
-   "role": "System Manager"
-  },
-  {
-   "role": "Administrator"
-  },
-  {
-   "role": "Accounts User"
-  }
- ],
+ "roles": [],
  "timeout": 0
 }
