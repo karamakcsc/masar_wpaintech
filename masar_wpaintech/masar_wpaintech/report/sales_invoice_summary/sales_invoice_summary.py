@@ -21,7 +21,9 @@ def data(filters):
     sql = frappe.db.sql(f"""SELECT 
 								tsi.name AS `Sales Invoice`,
 								tsi.customer AS Customer,
-								tsi.customer_name AS `Customer Name`,
+                                CASE WHEN tsi.customer = 'Cash Customer' THEN tsi.custom_customer_name_en
+								    ELSE tsi.customer_name 
+                                END AS `Customer Name`,
 								tsi.posting_date AS `Invoice Date`,
 								tsi.net_total AS `Net Total`,
                                 tsi.discount_amount AS `Discount Amount`,
