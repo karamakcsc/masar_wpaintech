@@ -22,7 +22,7 @@ frappe.query_reports["Sales Invoice Trends - Waha"] = {
 			options: [
 				{ value: "Item", label: __("Item") },
 				{ value: "Customer", label: __("Customer") },
-
+				{ value: "Brand", label: __("Brand") },
 			],
 			default: "Customer",
 			dashboard_config: {
@@ -33,7 +33,7 @@ frappe.query_reports["Sales Invoice Trends - Waha"] = {
 			fieldname: "group_by",
 			label: __("Group By"),
 			fieldtype: "Select",
-			options: ["", { value: "Item", label: __("Item") }, { value: "Customer", label: __("Customer") }],
+			options: ["", { value: "Item", label: __("Item") }, { value: "Customer", label: __("Customer") }, { value: "Brand", label: __("Brand") },],
 			default: "Item",
 		},
 		// {

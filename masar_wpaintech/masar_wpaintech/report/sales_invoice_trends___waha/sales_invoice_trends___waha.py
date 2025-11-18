@@ -85,9 +85,15 @@ def get_data(filters, conditions):
 		elif filters.get("group_by") == "Customer":
 			sel_col = "t1.customer"
 
+		elif filters.get("group_by") == "Brand":
+			sel_col = "t2.brand"
+
 		if filters.get("based_on") in ["Item", "Customer"]:
 			inc = 2
 		if filters.get("based_on") == "Customer" and filters.get("customer"):
+			cond += f" and t1.customer = '{filters.get('customer')}'"
+   
+		if filters.get("based_on") == "Brand" and filters.get("customer"):
 			cond += f" and t1.customer = '{filters.get('customer')}'"
 
 		
@@ -244,11 +250,19 @@ def based_wise_columns_query(based_on, trans):
 		based_on_details["based_on_group_by"] = "t1.customer"
 		based_on_details["addl_tables"] = ""
 
+	elif based_on == "Brand":
+		based_on_details["based_on_cols"] = ["Brand:Link/Brand:120"]
+		based_on_details["based_on_select"] = "t2.brand,"
+		based_on_details["based_on_group_by"] = "t2.brand"
+		based_on_details["addl_tables"] = ""
+
 	return based_on_details
 
 def group_wise_column(group_by):
 	if group_by == "Item":
 		return ["Item:Link/Item:120", "Description:Data:250"]
+	elif group_by == "Brand":
+		return ["Brand:Link/Brand:120"]
 	elif group_by:
 		return [group_by + ":Link/" + group_by + ":120"]
 	else:
