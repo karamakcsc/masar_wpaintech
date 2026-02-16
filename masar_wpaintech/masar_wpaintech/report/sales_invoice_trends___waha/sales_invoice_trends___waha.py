@@ -88,7 +88,7 @@ def get_data(filters, conditions):
 		elif filters.get("group_by") == "Brand":
 			sel_col = "t2.brand"
 
-		if filters.get("based_on") in ["Item", "Customer"]:
+		if filters.get("based_on") in ["Item", "Customer", "Brand"]:
 			inc = 2
 		if filters.get("based_on") == "Customer" and filters.get("customer"):
 			cond += f" and t1.customer = '{filters.get('customer')}'"
