@@ -29,15 +29,6 @@ def data(filters):
             group_by = "tb.item_code"
             
     sql = frappe.db.sql(f"""
-		WITH po AS(
-			SELECT 
-				tpo.name AS name,
-				tpoi.item_code,
-				tpoi.qty AS pending_order
-			FROM `tabPurchase Order` tpo 
-			INNER JOIN `tabPurchase Order Item` tpoi ON tpo.name = tpoi.parent
-			WHERE tpo.docstatus = 0
-		)
 		SELECT DISTINCT
 			tb.item_code AS `Item Code`,
 			ti.item_name AS `Item Name`,
@@ -46,13 +37,13 @@ def data(filters):
 			tb.stock_uom AS `Stock UOM`,
 			ti.custom_carton_capacity AS `Qty Per Carton`,
 			{select}
-			SUM(tb.actual_qty) AS `Stock Balance`,
-			AVG(tb.valuation_rate) AS `Valuation Rate`,
-			SUM(IFNULL(po.pending_order, 0)) AS `Pending Qty`
+			tb.actual_qty AS `Stock Balance`,
+			tb.valuation_rate AS `Valuation Rate`,
+			IFNULL(tpoi.qty, 0) AS `Pending Qty`
 		FROM `tabBin` tb 
 		INNER JOIN `tabItem` ti ON tb.item_code = ti.name
-		LEFT JOIN po ON tb.item_code = po.item_code
-		WHERE {conditions} AND tb.warehouse NOT IN ('Stores - WP')
+		inner join `tabPurchase Order Item` tpoi on tb.item_code = tpoi.item_code and tpoi.docstatus =0
+		WHERE {conditions} AND tb.warehouse NOT IN ('Stores - WP') 
 		GROUP BY {group_by}
 	""")
     
